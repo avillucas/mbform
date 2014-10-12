@@ -1,0 +1,90 @@
+/*-----------------------------------------------------------------*/
+/*-----------------------------------------------------------------*/
+#mbmainform{
+border:0;
+background:none repeat scroll 0 0 rgba(233, 149, 0, 0.7);
+padding:15px;
+width:215px;
+position:absolute;
+z-index:9999;
+margin-top:25px
+	
+}
+#mbmainform .submit{
+width:100%;
+padding:5px 0 5px 0;
+font: 17px Arial,Helvetica,sans-serif;
+color:#000;
+display:block;
+margin-top:7px;
+float:right;
+background:#fff;
+}
+#mbmainform .submit:hover{
+background:#fff;
+cursor:pointer;
+}
+#mbmainform .tpl-hidden{
+position:absolute;
+top:-9999em;
+left:-9999em;
+}
+#mbmainform label{
+    float: left;
+    overflow: hidden;
+    padding: 7px 0;
+    width: 50%;
+}
+#mbmainform label span {
+    color: #fff;
+    display: block;
+    float: left;
+    font-weight: normal;
+    line-height: 15px;
+    padding: 0 0px;
+font-size: 15px;
+}
+#mbmainform label input{
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    height: 13px;
+    line-height: 20px;
+    padding-left: 2px;
+    width: 85%;
+    font-weight: bold;
+    color: #000
+}
+p#verdispo{
+margin:auto;
+/*margin-bottom:20px; */
+font: 17px Arial,Helvetica,sans-serif;
+color: #fff;
+}
+#mbmainform fieldset{
+padding:5px;
+border:none
+}
+/*-----------------------------------------------------------------*/
+/*-----------------------------------------------------------------*/
+
+/* OCULTAR MINIMOTOR DE TODAS PÁGINAS. */
+.minimotor-widget-zone {display: block;}
+
+/* MOSTRAR MINIMOTOR DE LAS PÁGINAS QUE SE USAN. */
+/*.page-id-1929 .minimotor-widget-zone {display: block;}
+.page-id-2395 .minimotor-widget-zone {display: block;}
+.page-id-2927 .minimotor-widget-zone {display: block;}*/
+
+
+
+
+/* DATE PICKER ESPECIAL PARA ESTE THEME */
+.ui-datepicker{
+width: 75%;
+}
+.ui-datepicker tbody tr{
+background:  none repeat scroll 0 0 #FFFFFF;
+}
+
+.page-id-3359 .minimotor-widget-zone{display:none}
