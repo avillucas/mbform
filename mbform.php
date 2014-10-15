@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: mbform
-Plugin URI: http://www.div-it.com.ar/wp-plugins/mbform/
+Plugin URI: https://github.com/avillucas/mbform
 Description: Agregá a tu wordpress un formulario para linkearlo a tu  motor book-it  
 Version: 1.0
 Author: Div-it
