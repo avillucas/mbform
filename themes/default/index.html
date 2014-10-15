@@ -1,0 +1,26 @@
+	<div class="side-nav minimotor-widget-zone container mbresponsive">
+	   	<form id="{id}" action="{action}" target="_blank" method="GET" >
+			<p id="verdispo">{titulo}</p>
+			<fieldset>        
+				<legend class="tpl-hidden">{subtitulo}</legend>
+				<input type="hidden" value="1" name="step" />
+				<input type="hidden" id="hoteldestino" name="hoteldestino" value="{hotel-destino}" />        
+				<input type="hidden" id="cNoches" name="cNoches" value="{noches}" />
+				<input type="hidden" value="{codigo_idioma}.'" name="lang" />
+				<label>
+					<input type="text" class="datepicker" id="fechain" name="fechain"  placeholder="{campo_in}" />
+				</label>
+				<label>
+					<input type="text" class="datepicker" id="fechaout" name="fechaout"  placeholder="{campo_out}"  />        
+				</label>        
+				<input type="submit" class="submit" name="boton"  value="{submit}" />
+			</fieldset>
+		</form>
+		<div class="btn-mtor">
+			<span class="res-btn-w">
+				<a class="btn" href="{url_motor}">
+					<i class="date_icon"></i> {llamenos}
+				</a>
+			</span>
+		</div>
+	</div>
