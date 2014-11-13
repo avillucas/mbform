@@ -95,6 +95,14 @@ array (
 				'w_url' 
 		) );
 		
+		add_settings_field ( 'w_llamenos_url', _ ( 'Url del boton llamenos' ), // Title
+		array (
+		$this,
+		'mbform_admin_input_tranlate_input'
+				), 'mbform-setting', 'setting_section_id', array (
+				'w_llamenos_url'
+						) );
+		
 		add_settings_field ( 'noches', _ ( 'Noches default' ), // Title
 array (
 				$this,
@@ -157,6 +165,21 @@ array (
 		), 'mbform-setting', 'setting_section_id', array (
 				'w_out' 
 		) );
+		add_settings_field ( 'w_theme', _ ( 'Theme' ), // Title
+		array (
+		$this,
+		'mbform_admin_theme'
+				), 'mbform-setting', 'setting_section_id', array (
+				'w_theme'
+						) );
+		add_settings_field ( 'w_position', _ ( 'Posicion' ), // Title
+		array (
+		$this,
+		'mbform_admin_position'
+				), 'mbform-setting', 'setting_section_id', array (
+				'w_position'
+						) );
+		
 	}
 	public function sanitaze_traduccion($text) {
 		// @todo armar la sanitizacion
@@ -178,25 +201,15 @@ array (
 		
 		if (isset ( $input ['urlmotor'] )) {
 			// revisar que tenga el https al principio
-			$url = sanitize_text_field ( $input ['urlmotor'] );
-			// sacar barras del principio y el final
-			$url = trim ( $url, '/' );        	 
-        	//sacar el http si lo tiene y poner un https 
-        	$url = str_replace('http://','',$url );
-			// revisar que tenga el https:// al principio
-			if (strpos ( $url, 'https://' ) !== FALSE) {
-				$url = 'https://' . $url;
-			}
-			// si no termina en barra
-			$len = strlen ( $url );
-			if ($url [$len - 1] != '/') {
-				$url .= '/';
-			}
+			$url = sanitize_text_field ( trim($input ['urlmotor']) );		
 			$new_input ['urlmotor'] = $url;
 		}
 		
 		if (isset ( $input ['w_url'] ))
 			$new_input ['w_url'] = $this->sanitaze_traduccion ( $input ['w_url'] );
+		
+		if (isset ( $input ['w_theme'] ))
+			$new_input ['w_theme'] = $this->sanitaze_traduccion ( $input ['w_theme'] );
 		
 		if (isset ( $input ['w_titulo'] ))
 			$new_input ['w_titulo'] = $this->sanitaze_traduccion ( $input ['w_titulo'] );
@@ -213,11 +226,17 @@ array (
 		if (isset ( $input ['w_llamenos'] ))
 			$new_input ['w_llamenos'] = $this->sanitaze_traduccion ( $input ['w_llamenos'] );
 		
+		if (isset ( $input ['w_llamenos_url'] ))
+			$new_input ['w_llamenos_url'] = $this->sanitaze_traduccion ( $input ['w_llamenos_url'] );
+		
 		if (isset ( $input ['w_in'] ))
 			$new_input ['w_in'] = $this->sanitaze_traduccion ( $input ['w_in'] );
 		
 		if (isset ( $input ['w_out'] ))
 			$new_input ['w_out'] = $this->sanitaze_traduccion ( $input ['w_out'] );
+		
+		if (isset ( $input ['position'] ))
+			$new_input ['position'] = $this->sanitaze_traduccion ( $input ['position'] );
 		
 		if (isset ( $input ['noches'] ))
 			$new_input ['noches'] = intval ( $input ['noches'] );
@@ -235,6 +254,12 @@ array (
 		$campo = $args [0];
 		printf ( '<input type="text" id="mbform_' . $campo . '" name="mbform_option_name[' . $campo . ']" value="%s" />', isset ( $this->options [$campo] ) ? esc_attr ( $this->options [$campo] ) : '' );
 	}
+	function mbform_admin_theme() {		
+		printf ( '<input type="text" id="mbform_theme" name="mbform_option_name[theme]" value="%s" />', isset ( $this->options ['theme'] ) ? esc_attr ( $this->options ['theme'] ) : 'default' );
+	}
+	function mbform_admin_position() {
+		printf ( '<input type="text" id="mbform_position" name="mbform_option_name[position]" value="%s" /><a href="http://codex.wordpress.org/Plugin_API/Action_Reference" target="_blank">Acciones Disponibles</a>', isset ( $this->options ['position'] ) ? esc_attr ( $this->options ['position'] ) : 'get_sidebar' );
+	}
 	function mbform_admin_input_hotelid() {
 		printf ( '<input type="text" id="hotelid" name="mbform_option_name[hotelid]" value="%s" />', isset ( $this->options ['hotelid'] ) ? esc_attr ( $this->options ['hotelid'] ) : '' );
 	}
@@ -242,11 +267,13 @@ array (
 		printf ( '<input type="text" id="noches" name="mbform_option_name[noches]" value="%s" />', isset ( $this->options ['noches'] ) ? esc_attr ( $this->options ['noches'] ) : '' );
 	}
 	function mbform_admin_input_urlmotor() {
-		printf ( '<input type="text" id="hotelid" name="mbform_option_name[urlmotor]" value="%s" />', isset ( $this->options ['urlmotor'] ) ? esc_attr ( $this->options ['urlmotor'] ) : '' );
+		printf ( '<input type="text" id="urlmotor" name="mbform_option_name[urlmotor]" value="%s" />.mbooking.com.ar', isset ( $this->options ['urlmotor'] ) ? esc_attr ( $this->options ['urlmotor'] ) : '' );
 	}
 }
 
 if (is_admin ())
 	$my_settings_page = new MBFormPlugin ();
-else
-	add_action ( 'get_sidebar', 'mbform_make_form', 100 );
+else{
+	$mb = get_option ( 'mbform_option_name' );
+	add_action ( $mb['position'], 'mbform_make_form', 100 );
+}
